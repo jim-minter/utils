@@ -1,0 +1,11 @@
+#!/bin/bash
+
+branch="$(git rev-parse --abbrev-ref HEAD)"
+git push --set-upstream origin "$branch"
+url=$(git remote get-url upstream)
+url=${url%.git}
+if [[ $url =~ .*@.*:.* ]]; then
+  url=${url##*@}
+  url=https://${url/://}
+fi
+xdg-open "${url}/compare/master...jim-minter:$branch?expand=1"

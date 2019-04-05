@@ -1,0 +1,8 @@
+#!/bin/bash
+
+/usr/bin/git "$@"
+rv=$?
+if [[ "$1" == "commit" && "$rv" == 0 ]]; then
+  printf '%s: commit on %s#%s (%s)\n' "$(date)" "$PWD" "$(git rev-parse --abbrev-ref HEAD)" "$(git log --pretty=format:"%s" -n 1)" >>~/.gitlog
+fi
+exit $rv

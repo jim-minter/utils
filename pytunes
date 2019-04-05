@@ -1,0 +1,6 @@
+#!/bin/bash
+
+PORT=${1:-1024}
+
+pactl list | grep -q pytunes.monitor || pactl load-module module-null-sink sink_name=pytunes sink_properties=device.description=PyTunes
+( cd ~/src/github.com/jim-minter/python-airtunes-server/pytunes-server && ./server.py -s pytunes.monitor $(getent hosts Philips-AD7050W-0C55B4.local | cut -d' ' -f1) $PORT )
