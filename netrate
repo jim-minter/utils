@@ -24,12 +24,12 @@ if __name__ == "__main__":
 
         ifaces = sorted([iface for iface in set(old) & set(new) if rx.match(iface)])
         for iface in ifaces:
-            print "%10s:  RX: %6.2f Mbps (%4d pps)  " \
+            print("%12s:  RX: %6.2f Mbps (%4d pps)  " \
                 "TX: %6.2f Mbps (%4d pps)" % \
                 (iface,
                  (new[iface][0] - old[iface][0]) / 250000.0,
                  (new[iface][1] - old[iface][1]) / 2,
                  (new[iface][8] - old[iface][8]) / 250000.0,
                  (new[iface][9] - old[iface][9]) / 2
-                )
+                ))
         old = new
